@@ -30,18 +30,29 @@ export default {
         link: '',
         price: '',
       },
-      catalogue_items: [{feff: "begfa", gaefafea: "grgrg"}],
+      catalogue_items: [],
     }
   },
     name: 'CatalogueForms',
-     mounted() {
+     created() {
         if (localStorage.getItem('catalogue_items')){
+            console.log("catalogue exists")
             this.catalogue_items = JSON.parse(localStorage.getItem('catalogue_items'))
         }
-      this.forms.name = localStorage.getItem('name')
-      this.forms.description = localStorage.getItem('desc')
-      this.forms.price = localStorage.getItem('price')
-      this.forms.link = localStorage.getItem('link')
+        if (localStorage.getItem('name')){
+            console.log("localstorage name exists")
+            this.forms.name = localStorage.getItem('name')
+            this.forms.description = localStorage.getItem('desc')
+            this.forms.price = localStorage.getItem('price')
+            this.forms.link = localStorage.getItem('link')
+        } else {
+            console.log("localstorage name is null")
+            localStorage.setItem('name', '')
+            localStorage.setItem('desc', '')
+            localStorage.setItem('link', '')
+            localStorage.setItem('price', '')
+        }
+      
     },
     watch: {
         forms: {
@@ -54,17 +65,17 @@ export default {
     },
     methods: {
         addItem() {
-        
-            console.log("catalogie items", this.catalogue_items)
             this.catalogue_items = [...this.catalogue_items, {name: this.forms.name, description: this.forms.description, link: this.forms.link, price: this.forms.price}]
             localStorage.setItem('catalogue_items', JSON.stringify(this.catalogue_items))
+            this.$emit('newForm', this.forms)
             localStorage.removeItem('name')
             localStorage.removeItem('desc')
             localStorage.removeItem('price')
             localStorage.removeItem('link')
-            console.log("catalogie items", this.catalogue_items)
-
-        
+            this.forms.name = ''
+            this.forms.description = ''
+            this.forms.link = ''
+            this.forms.price = ''
     }
     }
     ,
