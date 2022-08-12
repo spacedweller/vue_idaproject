@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="remove-icon" @click="remove()"></div>
         <div class="item-image">
             <img class="item-image" :src="link"/>
         </div>
@@ -14,12 +15,15 @@
 <script>
 export default {
     name: 'CatalogueItem',
-    props: ['id', 'name', 'description', 'link', 'price']
+    props: ['id', 'name', 'description', 'link', 'price'],
+    emits: ['id'],
+    methods: {
     }
-
+}
 </script>
 <style scoped>
     .container {
+        position: relative;
         box-sizing: border-box;
         width: 332px;
         height: 423px;
@@ -28,6 +32,18 @@ export default {
         border-radius: 4px;
         margin: 0px 16px 16px 0px;
     }
+
+    .remove-icon {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        z-index: 100;
+        border-radius: 30%;
+    }
+
 
     .item-image {
         box-sizing: border-box;

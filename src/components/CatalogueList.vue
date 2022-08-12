@@ -10,7 +10,7 @@ import CatalogueItem from "./CatalogueItem.vue"
 
 export default {
     name: 'CatalogueList',
-    components: { CatalogueItem },
+    components: {CatalogueItem} ,
         props: ['catalogueList']
         }
 
@@ -21,5 +21,7 @@ export default {
         width: 100%;
         padding-left: 16px;
         flex-flow: wrap;
+        height: 100%;
     }
+
 </style>

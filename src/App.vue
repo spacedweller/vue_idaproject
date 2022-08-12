@@ -1,15 +1,15 @@
 
 <template>
-  <ItemCatalogue/>
+  <StoreCatalogue/>
 </template>
 <script>
 
-import ItemCatalogue from './components/ItemCatalogue.vue'
+import StoreCatalogue from './components/StoreCatalogue.vue'
 export default {
   name: 'App',
   message: "",
   components: {
-    ItemCatalogue,
+    StoreCatalogue,
   }
 }
 </script>
@@ -24,7 +24,7 @@ export default {
 }
 
 html, body, #app {
-    height: 100vh;
+    box-sizing: border-box;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Sans+Pro:wght@400;600&display=swap');
