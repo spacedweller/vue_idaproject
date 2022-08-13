@@ -1,5 +1,5 @@
 <template>
-    <div  class="catalogueheader">
+    <div  class="catalogue-header">
         <div>
             <p>Добавление товара</p>
         </div>
@@ -15,7 +15,6 @@
 <script>
 export default {
     name: 'CatalogueHeader',
-
     data(){
         return {
             sorting: 'default',
@@ -36,7 +35,6 @@ export default {
     },
     methods: {
         changeSorting(type){
-            console.log("HEADER sortingg tossed:", type)
             this.sorting = type
             this.$emit('changeSorting', type)
             this.opened = false;
@@ -48,8 +46,8 @@ export default {
 }
 </script>
 <style scoped>
-    .catalogueheader {
-        font-family: 'Source Sans Pro';
+    .catalogue-header {
+        font-family: 'Source Sans Pro', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 28px;
@@ -75,9 +73,9 @@ export default {
         height: 100%;
         border: none;
         background: #FFFEFB;
-        box-shadow: 0px 2px 5px rgb(0 0 0 / 10%);
+        box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
         border-radius: 4px;
-        font-family: 'Source Sans Pro';
+        font-family: 'Source Sans Pro', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -93,13 +91,12 @@ export default {
         position: absolute;
         border: 1px solid #B4B4B4;
         transform: rotate(45deg);
-        width: 6.5px;
-        height: 6.5px;
-        transform: rotate(45deg);
+        width: 6px;
+        height: 6px;
         top: 12px;
         right: 15px;
         clip-path: inset(25% 0% 0 25%);
-        -webkit-clip-path: inset(25% 0% 0 25%);
+        -webkit-clip-path: rotate(45deg) inset(25% 0% 0 25%);
     }
 
     .sorting-list {
@@ -107,7 +104,7 @@ export default {
         position: absolute;
         background-color: white;
         list-style: none;
-        padding: 0px;
+        padding: 0;
         z-index: 1;
     }
 
@@ -115,9 +112,9 @@ export default {
         width: 100%;
         border: none;
         background: #FFFEFB;
-        box-shadow: 0px 2px 5px rgb(0 0 0 / 10%);
+        box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
         border-radius: 4px;
-        font-family: 'Source Sans Pro';
+        font-family: 'Source Sans Pro', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;

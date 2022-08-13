@@ -12,7 +12,7 @@
 import CatalogueForms from "./CatalogueForms.vue"
 import CatalogueHeader from "./CatalogueHeader.vue"
 import CatalogueList from "./CatalogueList.vue"
-import {initialArray} from "../extra.js"
+import {initialArray} from "@/extra"
 
 export default {
     name: 'StoreCatalogue',
@@ -26,11 +26,8 @@ export default {
     },
     created(){
         if (localStorage.getItem('catalogue_items') && localStorage.getItem('catalogue_items').length !== 2) {
-            console.log("catalogue length", localStorage.getItem('catalogue_items').length)
             this.catalogueList = JSON.parse(localStorage.getItem('catalogue_items'))
         } else {
-            console.log("initia array", initialArray)
-            console.log("initia array", initialArray.length)
             this.catalogueList = initialArray
         }
     },
@@ -43,7 +40,6 @@ export default {
             this.catalogueList = [...this.catalogueList, {name: form.name, description: form.description, link: form.link, price: form.price}]
         },
         setSorted(type){
-            console.log("STORE sortingg tossed:", type)
             localStorage.setItem('sorting', type)
             if (type === 'default'){
                 this.catalogueList.sort((v1, v2) => v1.index - v2.index).map((v) => v.name);
@@ -54,11 +50,9 @@ export default {
                 });
             }
             else if (type === 'ascending'){
-                console.log("SORTING FUNCTION ASCENDING")
                 this.catalogueList.sort((v1, v2) => v1.price - v2.price).map((v) => v.name);
             }
             else if (type === 'descending'){
-                console.log("SORTING FUNCTION DESCENDING")
                 this.catalogueList.sort((v1, v2) => v2.price - v1.price).map((v) => v.name);
             }
 
@@ -68,7 +62,6 @@ export default {
         catalogueList: {
             deep: true,
             handler(catalogueList){
-                console.log("catalogue list SAVED")
                 this.setSorted(localStorage.getItem('sorting'))
                 localStorage.setItem('catalogue_items', JSON.stringify(catalogueList))
             }

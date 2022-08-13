@@ -1,9 +1,9 @@
 <template>
     <div class='sidebar'>
         <p class="input-description">Наименование товара<span class="star"></span></p>
-        <form class="item-input" :class="{ 'invalid-input': valid.name != true && validation} ">
+        <form class="item-input" :class="{ 'invalid-input': !valid.name && validation} ">
             <textarea v-model="forms.name" class="textarea-input shorten ghost-text" placeholder="Введите наименование товара"></textarea>
-            <div class="validation-helper" v-if="valid.name != true && validation">Поле является обязательным</div>
+            <div class="validation-helper" v-if="!valid.name && validation">Поле является обязательным</div>
         </form>
 
          <p class="input-description">Описание товара</p>
@@ -12,18 +12,18 @@
         </form>
 
          <p class="input-description">Ссылка на изображение товара<span class="star"></span></p>
-        <form class="item-input" :class="{ 'invalid-input': valid.link != true && validation}">
+        <form class="item-input" :class="{ 'invalid-input': !valid.link && validation}">
             <textarea v-model="forms.link" class="textarea-input shorten ghost-text" placeholder="Введите ссылку"></textarea>
-            <div class="validation-helper" v-if="valid.link != true && validation">Поле является обязательным</div>
+            <div class="validation-helper" v-if="!valid.link && validation">Поле является обязательным</div>
         </form>
 
         <p class="input-description">Цена товара<span class="star"></span></p>
-        <form class="item-input" :class="{ 'invalid-input': valid.price != true && validation}">
+        <form class="item-input" :class="{ 'invalid-input': !valid.price && validation}">
             <textarea v-model="forms.price" class="textarea-input shorten ghost-text" placeholder="Введите цену"></textarea>
-            <div class="validation-helper" v-if="valid.price != true && validation">Поле является обязательным</div>
+            <div class="validation-helper" v-if="!valid.price && validation">Поле является обязательным</div>
         </form>
 
-        <button v-on:click="addItem()" :class="{'item-btn': activeButton, 'puff-out-center': activeButton, 'submit-button': activeButton == false}">Добавить товар</button>
+        <button v-on:click="addItem()" :class="{'item-btn': activeButton, 'puff-out-center': activeButton, 'submit-button': !activeButton}">Добавить товар</button>
     </div>
 </template>
 
@@ -50,13 +50,11 @@ export default {
      created() {
         
         if (localStorage.getItem('name')){
-            console.log("localstorage name exists")
             this.forms.name = localStorage.getItem('name')
             this.forms.description = localStorage.getItem('desc')
             this.forms.price = localStorage.getItem('price')
             this.forms.link = localStorage.getItem('link')
         } else {
-            console.log("localstorage name is null")
             localStorage.setItem('name', '')
             localStorage.setItem('desc', '')
             localStorage.setItem('link', '')
@@ -113,7 +111,6 @@ export default {
         addItem() {
             if (Object.values(this.valid).every(val => val === true)) {
                 this.validation = false
-                console.log("FORMS form is valid, adding new item to the catalogue")
                 this.$emit('newForm', this.forms)
                 localStorage.removeItem('name')
                 localStorage.removeItem('desc')
@@ -143,14 +140,14 @@ export default {
     top: 83px;
     padding: 24px;
     background: #FFFEFB;
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
 }
  
 
 .input-description {
     position: relative;
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -180,7 +177,7 @@ export default {
     height: 36px;
     width: 100%;
     background: #FFFEFB;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     border: none;
     margin-bottom: 16px;
@@ -188,7 +185,7 @@ export default {
 }
 
 .ghost-text {
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -215,10 +212,10 @@ export default {
     height: 36px;
     border:none;
     background: #7BAE73;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -239,7 +236,7 @@ export default {
     background: #EEEEEE;
     border-radius: 10px;
 
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -262,7 +259,7 @@ export default {
     position: absolute;
     left: -1px;
     top: 38px;
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 8px;

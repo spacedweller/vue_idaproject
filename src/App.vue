@@ -29,7 +29,6 @@ html, body, #app {
     box-sizing: border-box;
     min-width:360px;        
     width: auto !important; 
-    width:360px; 
 }
 
     [v-cloak] {

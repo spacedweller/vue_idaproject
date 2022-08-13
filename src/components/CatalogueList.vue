@@ -1,8 +1,12 @@
 <template>
     <div v-cloak>
-        <transition-group :duration="{ enter: 500, leave: 800 }" name="list" tag="p" class="shelf" v-if="catalogueList">
+        <transition-group :duration="{ enter: 500, leave: 800 }" name="list" tag="div" class="shelf" v-if="catalogueList">
             <div class="list-item" v-for="(item, index) in catalogueList" v-bind:key="item">
-                <CatalogueItem @removeItem="removeItem" :id="index" :name="item.name" :description="item.description" :link="item.link" :price="item.price"/>
+                <CatalogueItem @removeItem="removeItem"
+                               :id="index" :name="item.name"
+                               :description="item.description"
+                               :link="item.link"
+                               :price="item.price"/>
             </div>
         </transition-group>
     </div>
@@ -35,8 +39,7 @@ export default {
     display: inline-block;
     margin-right: 10px;
 }
-.list-enter, .list-leave-to
-/* .list-complete-leave-active до версии 2.1.8 */ {
+.list-enter, .list-leave-to {
     opacity: 0;
     transform: translateY(30px);
 }
@@ -54,7 +57,7 @@ export default {
     }
 
     .list-item {
-        margin: 0px 0px 16px 0px;
+        margin: 0 0 16px 0;
 
     }
 }
