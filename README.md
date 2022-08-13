@@ -1,28 +1,8 @@
-<<<<<<< HEAD
-# vue_idaproject
-=======
-# idaproject
+Тестовый проэкт страницы для компании idaproject на VueJS
 
-## Project setup
-```
-npm install
-```
+NPM version 8.16.0
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
->>>>>>> master
+Установка:
+1. git clone https://github.com/spacedweller/vue_idaproject.git
+2. npm install
+3. npm run serve
