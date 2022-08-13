@@ -1,8 +1,10 @@
 <template>
-    <CatalogueHeader @changeSorting="setSorted"/>
-    <div class="catalogue-wrapper">
-        <CatalogueForms @newForm="addItem"/>
-        <CatalogueList @removeItem="removeItem" :catalogueList="catalogueList"/>
+    <div>
+        <CatalogueHeader @changeSorting="setSorted"/>
+        <div class="catalogue-wrapper">
+            <CatalogueForms @newForm="addItem"/>
+            <CatalogueList @removeItem="removeItem" :catalogueList="catalogueList"/>
+        </div>
     </div>
 </template>
 
