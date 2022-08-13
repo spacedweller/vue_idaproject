@@ -2,7 +2,7 @@
     <div class='sidebar'>
         <p class="input-description">Наименование товара<span class="star"></span></p>
         <form class="item-input" :class="{ 'invalid-input': valid.name != true && validation} ">
-            <textarea v-model="forms.name" class="textarea-input ghost-text" placeholder="Введите наименование товара"></textarea>
+            <textarea v-model="forms.name" class="textarea-input shorten ghost-text" placeholder="Введите наименование товара"></textarea>
             <div class="validation-helper" v-if="valid.name != true && validation">Поле является обязательным</div>
         </form>
 
@@ -13,40 +13,39 @@
 
          <p class="input-description">Ссылка на изображение товара<span class="star"></span></p>
         <form class="item-input" :class="{ 'invalid-input': valid.link != true && validation}">
-            <textarea v-model="forms.link" class="textarea-input ghost-text" placeholder="Введите ссылку"></textarea>
+            <textarea v-model="forms.link" class="textarea-input shorten ghost-text" placeholder="Введите ссылку"></textarea>
             <div class="validation-helper" v-if="valid.link != true && validation">Поле является обязательным</div>
         </form>
 
-
         <p class="input-description">Цена товара<span class="star"></span></p>
         <form class="item-input" :class="{ 'invalid-input': valid.price != true && validation}">
-            <textarea v-model="forms.price" class="textarea-input ghost-text" placeholder="Введите цену"></textarea>
+            <textarea v-model="forms.price" class="textarea-input shorten ghost-text" placeholder="Введите цену"></textarea>
             <div class="validation-helper" v-if="valid.price != true && validation">Поле является обязательным</div>
         </form>
 
-        <button v-on:click="addItem()" :class="{'item-btn': activeButton, 'submit-button': activeButton == false}">Добавить товар</button>
+        <button v-on:click="addItem()" :class="{'item-btn': activeButton, 'puff-out-center': activeButton, 'submit-button': activeButton == false}">Добавить товар</button>
     </div>
 </template>
 
 <script>
 export default {
     data() {
-    return {
-      forms: {
-        name: '',
-        description: '',
-        link: '',
-        price: '',
-      },
-      valid: {
-        name: false,
-        link: false,
-        price: false,
-      },
-      validation: false,
-      activeButton: false,
-    }
-  },
+        return {
+            forms: {
+                name: '',
+                description: '',
+                link: '',
+                price: '',
+            },
+            valid: {
+                name: false,
+                link: false,
+                price: false,
+            },
+            validation: false,
+            activeButton: false,
+        }
+    },
     name: 'CatalogueForms',
      created() {
         
@@ -65,8 +64,6 @@ export default {
         }
       
     },
-
-    
     watch: {
         forms: {
             handler(forms) {
@@ -100,17 +97,17 @@ export default {
                     localStorage.removeItem('price')
                 }
 
-                if (Object.values(this.valid).every(val => val === true)) {
+                if (Object.values(this.valid).every(val => val === true)) { 
                     this.activeButton = true
                 } else {
-                    this.activeButton = false
+                    setTimeout(() => this.activeButton  = false, 300);
+                    
                 }
 
                 if (Object.values(this.valid).every(val => val === false)) {
                     this.validation = false
                 }
             }, deep: true}
-        
     },
     methods: {
         addItem() {
@@ -134,10 +131,6 @@ export default {
     ,
 
 }
-
-console.log(localStorage)
-localStorage.removeItem('ghj')
-
 </script>
 
 <style scoped>
@@ -152,7 +145,8 @@ localStorage.removeItem('ghj')
     background: #FFFEFB;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04), 0px 6px 10px rgba(0, 0, 0, 0.02);
     border-radius: 4px;
-    }
+}
+ 
 
 .input-description {
     position: relative;
@@ -280,4 +274,54 @@ localStorage.removeItem('ghj')
     color: #FF8484;
 }
 
+.shorten {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.puff-out-center:focus {
+	-webkit-animation: puff-out-center 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+	animation: puff-out-center 1.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+
+@-webkit-keyframes puff-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+}
+@keyframes puff-out-center {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: initial;
+        margin-bottom: 16px;
+    }
+}
 </style>
